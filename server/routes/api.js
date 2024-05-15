@@ -15,10 +15,12 @@ router.get('/users', (req, res) => {
 });
 
 // User login and signup check
-router.get('/users/:userName/:password', (req, res) => {
+router.get('/users/:userName/:email/:password', (req, res) => {
     const userName = req.params.userName;
+    const email = req.params.email;
     const password = req.params.password;
-    pool.query('SELECT * FROM users WHERE user_name = $1 AND user_password = $2', [userName, password], (err, result) => {
+   
+    pool.query('SELECT * FROM users WHERE user_name = $1 AND user_email = $2 and user_password = $3', [userName, email, password], (err, result) => {
         if (err) {
             console.error('Error executing query', err.stack);
             return res.status(500).json({ error: 'Internal server error' });
@@ -32,8 +34,9 @@ router.get('/users/:userName/:password', (req, res) => {
 });
 
 // Create a new user
-router.post('/users/:userName/:password:/initialScore', (req, res) => {
+router.post('/users/:userName/:email/:password:/initialScore', (req, res) => {
     const userName = req.params.userName;
+    const email = req.params.email;
     const password = req.params.password;
     const initialScore = req.params.initialScore;
 
@@ -45,7 +48,7 @@ router.post('/users/:userName/:password:/initialScore', (req, res) => {
             console.error('Error beginning transaction', err.stack);
             return res.status(500).json({ error: 'Internal server error' });
         }
-        pool.query('INSERT INTO users (user_name, user_password) VALUES ($1, $2) RETURNING *', [userName, password], (err, userResult) => {
+        pool.query('INSERT INTO users (user_name, user_email, user_password) VALUES ($1, $2, $3) RETURNING *', [userName, email, password], (err, userResult) => {
             if (err) {
                 console.error('Error inserting user', err.stack);
                 pool.query('ROLLBACK', (rollbackErr) => {
