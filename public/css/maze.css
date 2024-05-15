@@ -1,0 +1,53 @@
+body{
+    background-image: url(https://images.squarespace-cdn.com/content/v1/5d7b921aa20ea468a889fb20/1568380647526-YX9J52FU8INU1YFJS65P/njPhhkca.gif);
+    background-size:cover;
+    background-position: center;
+}
+.maze {
+    display: grid;
+    grid-template-columns: repeat(13, 30px);
+    grid-template-rows: repeat(13, 30px);
+    gap: 0px;
+}
+.cell {
+    width: 30px;
+    height: 30px;
+    background-color: #eee;
+}
+.wall:hover{
+    background-color:#2d4f3f ;
+    transform: translateY(-10px);
+}
+.wall {
+    background-color:#183d3d;
+    
+}
+.player {
+    background-color: #ff5733;
+    background-image: url(https://images.squarespace-cdn.com/content/v1/5d7b921aa20ea468a889fb20/1568380647526-YX9J52FU8INU1YFJS65P/njPhhkca.gif);
+
+}
+.fade-out {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}
+
+@media screen and (max-width:600px){
+    .maze {
+        display: grid;
+        grid-template-columns: repeat(13, 10px);
+        grid-template-rows: repeat(13, 10px);
+        gap: 0px;
+    }
+    .cell {
+        width: 10px;
+        height: 10px;
+        background-color: #eee;
+    }
+    .wall {
+        background-color: #333;
+    }
+    .player {
+        background-color: #ff5733;
+    }
+}
