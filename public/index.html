@@ -1,15 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Code Runner</title>
-    <link rel="stylesheet" href="./css/index.css">
-</head>
-<body>
-    <div>
-        
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <audio id="autoplayAudio">
+      <source src="./assets/bgMusic.mp3" type="audio/mp3" loop />
+    </audio>
+    <header>
+      <div class="navbar">
+        <div class="logo"><a href="#">Code Runner</a></div>
+        <ul class="links">
+          <li><a href="hero">Home</a></li>
+          <li><a href="about">About</a></li>
+          <li><a href="#login-section">Login</a></li>
+          <li><a href="feedback">Feedback</a></li>
+        </ul>
+        <a href="#" class="action-btn">Get Started</a>
+        <div class="toggle-btn">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+      </div>
+      <div class="dropdown-menu">
+        <li><a href="hero">Home</a></li>
+        <li><a href="about">About</a></li>
+        <li><a href="#login-section">Login</a></li>
+        <li><a href="feedback">Feedback</a></li>
+        <li><a href="#" class="action-btn">Get Started</a></li>
+      </div>
+    </header>
+
+    <div class="bgAnimation" id="bgAnimation">
+      <div class="backgroundAnim"></div>
     </div>
-    <script src="./js/index.js"></script>
-</body>
+
+    <main>
+      <section class="hero">
+        <h1>Welcome</h1>
+        <p>
+          CodeRunner is an entertaining maze game <br />
+          which also tests your coding skills
+        </p>
+      </section>
+      <!-- Login Section -->
+      <section id="login-section">
+        <div class="login-box">
+          <form action="">
+            <h2>Login</h2>
+            <div class="input-box">
+              <span class="icon"><i class="fa-solid fa-envelope"></i></span>
+              <input type="email" required />
+              <label>Email</label>
+            </div>
+            <div class="input-box">
+              <span class="icon"><i class="fa-solid fa-lock"></i></span>
+              <input type="password" required />
+              <label>Password</label>
+            </div>
+            <div class="remember-forgot">
+              <label><input type="checkbox" />Remember me</label>
+              <a href="#">Forgot Password</a>
+            </div>
+            <button type="submit">Login</button>
+            <div class="register-link">
+              <p>Don't have an account? <a href="#">Register</a></p>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Signup-Sectiom -->
+      <section id="signup-section">
+        <div class="signup-box">
+          <form action="">
+            <h2>Signup</h2>
+            <div class="input-box">
+              <span class="icon"><i class="fa-solid fa-user"></i></span>
+              <input type="text" required />
+              <label>Username</label>
+            </div>
+            <div class="input-box">
+              <span class="icon"><i class="fa-solid fa-envelope"></i></span>
+              <input type="email" required />
+              <label>Email</label>
+            </div>
+            <div class="input-box">
+              <span class="icon"><i class="fa-solid fa-lock"></i></span>
+              <input type="password" required />
+              <label>Password</label>
+            </div>
+            <button type="submit">Signup</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <script
+      src="https://kit.fontawesome.com/0508f81e27.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="./js/index.js" async defer></script>
+  </body>
 </html>
