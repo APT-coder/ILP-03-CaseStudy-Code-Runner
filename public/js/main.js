@@ -40,7 +40,16 @@ function toggleAbout() {
 }
 
 function startGame() {
-    alert('Game Started');
+    const gameMode = document.getElementById("gameMode").value;
+    if(gameMode === "single"){
+        window.location.href = "../html/maze.html";
+    }
+    else if(gameMode === "multi"){
+        window.location.href = "../html/mazeMulti.html";
+    }
 }
+
+const userName = localStorage.getItem("username");
+document.getElementById("username-container").textContent = userName;
 
 
