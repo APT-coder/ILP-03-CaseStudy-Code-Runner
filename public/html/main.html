@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Code Runner</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <audio id="autoplayAudio">
+        <source src="../assets/bgMusic.mp3" type="audio/mp3" loop>
+    </audio>
+    <header class="header">
+        <h1>CODE<span>RUNNER</span></h1>
+        <nav>
+            <div style="position: relative;">
+                <button id="instructionButton" class="btn" type="button" onclick="toggleInstructions()">
+                    <i class="fa-sharp fa-solid fa-question fa-lg" style="color: #ffff;"></i>
+                </button>
+                <div id="instructions" class="instructions-card">
+                    <!-- instructions -->
+                </div>
+            </div>
+
+
+            <div>
+                <a href="#">
+                    <button id="audioButton" onclick="toggleAudio()">
+                        <i id="audioIcon" class="fa-solid fa-volume-high" style="color: #ffff;"></i>
+                    </button>
+                </a>
+            </div>
+
+            <div style="position: relative;">
+                <button id="aboutButton" class="btn" type="button" onclick="toggleAbout()">
+                    <i class="fa-solid fa-exclamation fa-lg" style="color: #ffff;"></i>
+                </button>
+                <div id="about" class="about-card">
+                    <!-- about -->
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="bgAnimation" id="bgAnimation">
+        <div class="backgroundAnim"></div>
+    </div>
+
+    <div class="container-fluid main-content">
+        <div class="welcome-box">
+            <h2 class="welcome">WELCOME</h2>
+            <div class="username text-center text-white" id="username-container" style="font-size: 30px;">username</div>
+            <div class="dropdown" id="selectMode">
+                <select id="gameMode" onchange="selectGameMode(this.value)">
+                    <option value="single">Single Player</option>
+                    <option value="multi">Multiplayer</option>
+                </select>
+            </div>
+
+
+            <button class="start-button" onclick="startGame()">Start</button>
+        </div>
+
+        <div class="score-board-box">
+            <div>
+                <h2 style="color: #db7a0b;">SCOREBOARD</h2>
+            </div>
+            <div class="scoreboard-rankings">
+                <table id="scoresTable">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scoresBody">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="../js/main.js" async defer></script>
+    <script src="../js/scoreBoard.js"></script>
+    <script src="https://kit.fontawesome.com/0508f81e27.js" crossorigin="anonymous"></script>,sc
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

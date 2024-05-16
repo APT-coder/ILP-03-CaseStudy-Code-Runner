@@ -5,13 +5,13 @@ body{
 }
 .maze {
     display: grid;
-    grid-template-columns: repeat(13, 30px);
-    grid-template-rows: repeat(13, 30px);
+    grid-template-columns: repeat(22, 15px);
+    grid-template-rows: repeat(22, 15px);
     gap: 0px;
 }
 .cell {
-    width: 30px;
-    height: 30px;
+    width: 15px;
+    height: 15px;
     background-color: #eee;
 }
 .wall:hover{
@@ -35,13 +35,13 @@ body{
 @media screen and (max-width:600px){
     .maze {
         display: grid;
-        grid-template-columns: repeat(13, 10px);
-        grid-template-rows: repeat(13, 10px);
+        grid-template-columns: repeat(22, 9px);
+        grid-template-rows: repeat(22, 9px);
         gap: 0px;
     }
     .cell {
-        width: 10px;
-        height: 10px;
+        width: 9px;
+        height: 9px;
         background-color: #eee;
     }
     .wall {
@@ -50,4 +50,75 @@ body{
     .player {
         background-color: #ff5733;
     }
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .winner-image-container{
+    display: flex;
+    justify-content: center;
+  }
+  .winner-image {
+    width: 200px;
+    margin-top: 20px;
+  }
+  
+#startGameBtn {
+    background-color: #28a745;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.5em;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+#startGameBtn:hover {
+    background-color: #218838;
+}
+
+#countdown {
+    color : white;
+    position: absolute;
+    top: calc(50% + 50px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 5rem !important;
+    z-index: 999;
+     
 }

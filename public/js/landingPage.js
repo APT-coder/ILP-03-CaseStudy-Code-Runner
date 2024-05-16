@@ -1,37 +1,29 @@
-setInterval(function(){
+setInterval(() => {
     let box = document.createElement("div");
     let type = Math.random() > 0.5 ? "forward" : "backward";
     box.classList.add(type);
-    document.querySelector(".container").appendChild(box)
-},100);
+    document.querySelector(".container").appendChild(box);
+}, 100);
 
-
-document.getElementById('logo').addEventListener('click', function() {
-    location.reload();
-});
-
-document.getElementById('game-title').addEventListener('click', function() {
-    // Blink animation
-    var title = document.getElementById('game-title');
+document.getElementById('game-title').addEventListener('click', () => {
+    const title = document.getElementById('game-title');
     title.style.animation = 'blink 0.25s ease-in-out 2';
 
-   
-    setTimeout(function() {
-        window.location.href = '../public/index.html'; // Redirect to index.html
+    setTimeout(() => {
+        window.location.href = '../public/index.html';
     }, 1000);
 });
 
-// JavaScript to display game description letter by letter
-var description = document.getElementById('game-description');
-var text = "A fun 8-bit maze game where you solve coding questions as you run through!";
-var index = 0;
+const description = document.getElementById('game-description');
+const text = "A fun 8-bit maze game where you solve coding questions as you run through!";
+let index = 0;
 
-function displayText() {
+const displayText = () => {
     if (index < text.length) {
         description.textContent += text.charAt(index);
         index++;
         setTimeout(displayText, 50);
     }
-}
+};
 
 displayText();
