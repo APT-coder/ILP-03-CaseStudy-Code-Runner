@@ -95,9 +95,9 @@ router.get('/scores/:userName', (req, res) => {
 });
 
 // Update user score
-router.patch('/user_score/:userName/:score', (req, res) => {
+router.post('/user_score/:userName/:score', (req, res) => {
     const userName = req.params.userName;
-    const score = req.params.initialScore;
+    const score = req.params.score;
 
     if (!score || isNaN(score)) {
         return res.status(400).json({ error: 'Score must be a valid number' });
