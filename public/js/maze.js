@@ -13,10 +13,10 @@ const maze = [
     [1,0,0,0,1,0,0,0,0,0,1,0,1],
     [1,1,1,1,1,1,1,1,1,1,1,1,1]
 ];
- 
+
 const mazeElement = document.getElementById('maze');
 let playerPosition = { x: 0, y: 0 };
- 
+
 const questions = [
     {
         x : 1, y: 1,
@@ -24,7 +24,7 @@ const questions = [
         options: ["var", "let", "const", "variable"],
         answer: "variable"
     },
-    {
+{
         x : 1, y: 3,
         question: "Which of the following is NOT an example of a control structure in programming?",
         options: ["if statement", "loop", "function", "switch statement"],
@@ -137,7 +137,8 @@ const questions = [
         answer: "Git"
     },
 ];
- const randomQuestions=[
+
+const randomQuestions = [
     {
         
         question: "What does CSS stand for?",
@@ -169,7 +170,7 @@ const questions = [
     },
     {
         
-        question: "Which of the following is not a valid access modifier in Java/",
+        question: "Which of the following is not a valid access modifier in Java?",
         options: ["public", "private", "protected", "global"],
         answer: "global"
     },
@@ -207,29 +208,30 @@ const questions = [
                   "Defining multiple methods with the same implementation"],
         answer: "Defining multiple methods with the same name but different parameter lists"
     },
- ]
-function drawMaze() {
+];
+
+const drawMaze = () => {
     mazeElement.innerHTML = '';
-    for (let i = 0; i < maze.length; i++) {
-        for (let j = 0; j < maze[i].length; j++) {
-            const cell = document.createElement('div');
-            cell.classList.add('cell');
-            if (maze[i][j] === 1) {
-                cell.classList.add('wall');
+    maze.forEach(row => {
+        row.forEach(cell => {
+            const cellElement = document.createElement('div');
+            cellElement.classList.add('cell');
+            if (cell === 1) {
+                cellElement.classList.add('wall');
             }
-            mazeElement.appendChild(cell);
-        }
-    }
-}
- 
-function drawPlayer() {
+            mazeElement.appendChild(cellElement);
+        });
+    });
+};
+
+const drawPlayer = () => {
     mazeElement.querySelectorAll('.player').forEach(cell => {
         cell.classList.remove('player');
     });
     const playerCell = mazeElement.children[playerPosition.y * maze.length + playerPosition.x];
     playerCell.classList.add('player');
-}
- 
+};
+
 let score = 0;
 const questionElement = document.getElementById('questions');
 const optionsElement = document.getElementById('options');
@@ -239,14 +241,14 @@ questionCard.style.display = 'none';
 let answeredCorrectly = true;
 
 const visitedBlocks = [];
- 
-function movePlayer(event) {
+
+const movePlayer = (event) => {
     if (!answeredCorrectly) {
         return;
     }
     let newX = playerPosition.x;
     let newY = playerPosition.y;
- 
+
     switch (event.key) {
         case 'ArrowUp':
             newY = Math.max(0, playerPosition.y - 1);
@@ -263,15 +265,14 @@ function movePlayer(event) {
     }
     if (maze[newY][newX] === 0 && !visitedBlocks.includes(`${newX}-${newY}`)) {
         visitedBlocks.push(`${newX}-${newY}`);
-    const question = questions.find(q => q.x === newX && q.y === newY);
-   
-    if (question) { 
-         
-        questionCard.style.display = 'block';/////////////////
-        displayQuestionIntro();///////////
-        displayQuestion(question, newX, newY);
+        const question = questions.find(q => q.x === newX && q.y === newY);
+
+        if (question) {
+            questionCard.style.display = 'block';
+            displayQuestionIntro();
+            displayQuestion(question, newX, newY);
+        }
     }
-}
     if (maze[newY][newX] === 0) {
         const currentPlayerCell = mazeElement.children[playerPosition.y * maze.length + playerPosition.x];
         currentPlayerCell.classList.remove('player');
@@ -279,35 +280,27 @@ function movePlayer(event) {
         playerPosition.y = newY;
         drawPlayer();
     }
- 
-    if (playerPosition.x === maze[0].length-1 && playerPosition.y === maze.length - 3) {
-        // alert('Congratulations! You won!');
-        // window.removeEventListener('keydown', movePlayer);
+    if (playerPosition.x === maze[0].length - 1 && playerPosition.y === maze.length - 3) {
         const congratsMessage = document.createElement('p');
-            congratsMessage.textContent = 'Congratulations! You won!';
-            questionElement.textContent = '';
-            optionsElement.innerHTML = '';
-            questionElement.appendChild(congratsMessage);
+        congratsMessage.textContent = 'Congratulations! You won!';
+        questionElement.textContent = '';
+        optionsElement.innerHTML = '';
+        questionElement.appendChild(congratsMessage);
 
-            // Fade out the congrats message after 2 seconds
-            setTimeout(function() {
-                congratsMessage.style.opacity = '0';
-                
-                // Display the player's score after fading out the congrats message
-                setTimeout(function() {
-                    const scoreMessage = document.createElement('p');
-                    scoreMessage.textContent = 'Your score: ' + score;
-                    questionElement.appendChild(scoreMessage);
-                }, 1000); // Adjust the delay as needed
-            }, 2000); // Adjust the delay as needed
-            
-            
+        setTimeout(() => {
+            congratsMessage.style.opacity = '0';
+
+            setTimeout(() => {
+                const scoreMessage = document.createElement('p');
+                scoreMessage.textContent = 'Your score: ' + score;
+                questionElement.appendChild(scoreMessage);
+            }, 1000);
+        }, 2000);
     }
-}
+};
+
 let wrongAttempts = 0;
-function displayQuestion(question, newX, newY) {
-    
-    
+const displayQuestion = (question, newX, newY) => {
     questionElement.textContent = question.question;
     optionsElement.innerHTML = '';
     question.options.forEach((option, index) => {
@@ -322,52 +315,47 @@ function displayQuestion(question, newX, newY) {
                 questionElement.textContent = '';
                 optionsElement.innerHTML = '';
                 answeredCorrectly = true;
-                
             } else {
                 resultElement.textContent = "Wrong Answer";
                 choice.style.color = 'red';
                 setTimeout(() => {
                     resultElement.textContent = "";
                     wrongAttempts++;
-                    if (wrongAttempts <6) {
-                        // Get a random question from the set
+                    if (wrongAttempts < 6) {
                         const randomQuestion = getRandomQuestion();
-                        // Display the random question
                         displayQuestion(randomQuestion, newX, newY);
                     } else {
-                        // Display "Game Over"
                         gameOver();
                         const scoreMessage = document.createElement('p');
-                    scoreMessage.textContent = 'Your score: ' + score;
-                    questionElement.appendChild(scoreMessage);
+                        scoreMessage.textContent = 'Your score: ' + score;
+                        questionElement.appendChild(scoreMessage);
                     }
-                }, 2000); 
-            } 
-            
+                }, 2000);
+            }
         });
         optionsElement.appendChild(choice);
         answeredCorrectly = false;
     });
-}
-function getRandomQuestion() {
+};
+
+const getRandomQuestion = () => {
     return randomQuestions[Math.floor(Math.random() * randomQuestions.length)];
-}
-function gameOver() {
+};
+
+const gameOver = () => {
     questionElement.textContent = 'Game Over';
     optionsElement.innerHTML = '';
-    // Additional actions for game over can be added here
-}
+};
 
-function displayQuestionIntro()
-{
-    setTimeout(function() {
-    const questionIntro = document.getElementById('question-intro');
-    questionIntro.textContent="Your Question is here!!";
-    questionIntro.classList.add('fade-out');
+const displayQuestionIntro = () => {
+    setTimeout(() => {
+        const questionIntro = document.getElementById('question-intro');
+        questionIntro.textContent = "Your Question is here!!";
+        questionIntro.classList.add('fade-out');
     }, 2000);
-}
- 
+};
+
 window.addEventListener('keydown', movePlayer);
- 
+
 drawMaze();
 drawPlayer();
