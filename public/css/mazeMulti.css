@@ -51,3 +51,74 @@ body{
         background-color: #ff5733;
     }
 }
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .winner-image-container{
+    display: flex;
+    justify-content: center;
+  }
+  .winner-image {
+    width: 200px;
+    margin-top: 20px;
+  }
+  
+#startGameBtn {
+    background-color: #28a745;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.5em;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+#startGameBtn:hover {
+    background-color: #218838;
+}
+
+#countdown {
+    color : white;
+    position: absolute;
+    top: calc(50% + 50px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 5rem !important;
+    z-index: 999;
+     
+}
