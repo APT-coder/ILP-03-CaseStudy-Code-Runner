@@ -33,6 +33,7 @@ document
 
       localStorage.setItem("username", username);
       localStorage.setItem("password", password);
+      window.location.reload();
     } catch (error) {
       alert("Error creating user: " + error.message);
     }
@@ -57,6 +58,7 @@ document
       alert(`Welcome\n${username}`);
       localStorage.setItem('username', username);
       localStorage.setItem('password', password);
+      window.location.href="../public/html/main.html";
     } else {
       alert(data.error);
     }

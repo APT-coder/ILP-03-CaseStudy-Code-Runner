@@ -284,6 +284,7 @@ const movePlayer = (event) => {
         const congratsMessage = document.createElement('p');
         congratsMessage.textContent = 'Congratulations! You won!';
         const audio = document.getElementById('win-audio');
+        updateUserScore();
         audio.play();
         questionElement.textContent = '';
         optionsElement.innerHTML = '';
@@ -359,6 +360,27 @@ const displayQuestionIntro = () => {
         questionIntro.textContent = "Your Question is here!!";
         questionIntro.classList.add('fade-out');
     }, 2000);
+};
+
+const updateUserScore = async () => {
+    const userName = localStorage.getItem("username");
+    const userScore = score;
+    const apiEndpoint = `http://localhost:3000/api/user_score/${userName}/${userScore}`;
+    try {
+        const response = await fetch(apiEndpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        console.log('User score updated successfully:', data);
+    } catch (error) {
+        console.error('Error updating user score:', error);
+    }
 };
 
 window.addEventListener('keydown', movePlayer);
