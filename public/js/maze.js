@@ -283,6 +283,8 @@ const movePlayer = (event) => {
     if (playerPosition.x === maze[0].length - 1 && playerPosition.y === maze.length - 3) {
         const congratsMessage = document.createElement('p');
         congratsMessage.textContent = 'Congratulations! You won!';
+        const audio = document.getElementById('win-audio');
+        audio.play();
         questionElement.textContent = '';
         optionsElement.innerHTML = '';
         questionElement.appendChild(congratsMessage);
@@ -309,6 +311,8 @@ const displayQuestion = (question, newX, newY) => {
         choice.addEventListener('click', () => {
             if (option === question.answer) {
                 score++;
+                const audio = document.getElementById('correct-audio');
+                audio.play();
                 playerPosition.x = newX;
                 playerPosition.y = newY;
                 drawPlayer();
@@ -318,6 +322,8 @@ const displayQuestion = (question, newX, newY) => {
             } else {
                 resultElement.textContent = "Wrong Answer";
                 choice.style.color = 'red';
+                const audio = document.getElementById('wrong-audio');
+                audio.play();
                 setTimeout(() => {
                     resultElement.textContent = "";
                     wrongAttempts++;
@@ -359,3 +365,19 @@ window.addEventListener('keydown', movePlayer);
 
 drawMaze();
 drawPlayer();
+
+const bgAnimation = document.getElementById('bgAnimation');
+const numberOfColorBoxes = 400;
+
+for (let i = 0; i < numberOfColorBoxes; i++) {
+  const colorBox = document.createElement('div');
+  colorBox.classList.add('colorBox');
+  bgAnimation.append(colorBox)
+}
+
+document.addEventListener('keydown', function(event) {
+    const audio = document.getElementById('move-audio');
+    if (event.key.includes('Arrow')) {
+        audio.play();
+    }
+});

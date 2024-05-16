@@ -5,10 +5,6 @@ setInterval(() => {
     document.querySelector(".container").appendChild(box);
 }, 100);
 
-document.getElementById('logo').addEventListener('click', () => {
-    location.reload();
-});
-
 document.getElementById('game-title').addEventListener('click', () => {
     const title = document.getElementById('game-title');
     title.style.animation = 'blink 0.25s ease-in-out 2';

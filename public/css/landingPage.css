@@ -1,5 +1,6 @@
 body {
-    background: url(./Assets/8bit-Sky.jpg);
+    background: url(../assets/background.gif);
+    background-size: cover;
     background-color: #111 !important;
     color: #FFF !important;
     text-align: center !important; 
@@ -13,7 +14,7 @@ body {
     transition: color 0.3s;
 }
 #game-title:hover {
-    color: #db7a0b;
+    scale: .8;
 }
 #game-description {
     font-family: 'Press Start 2P', cursive;
