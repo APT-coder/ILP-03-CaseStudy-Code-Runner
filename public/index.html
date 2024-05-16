@@ -1,117 +1,118 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Code Runner</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="./css/index.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <audio id="autoplayAudio">
-      <source src="./assets/bgMusic.mp3" type="audio/mp3" loop />
-    </audio>
-    <header>
-      <div class="navbar">
-        <div class="logo"><a href="#">Code Runner</a></div>
-        <ul class="links">
-          <li><a href="hero">Home</a></li>
-          <li><a href="about">About</a></li>
-          <li><a href="#login-section">Login</a></li>
-          <li><a href="feedback">Feedback</a></li>
-        </ul>
-        <a href="#" class="action-btn">Get Started</a>
-        <div class="toggle-btn">
-          <i class="fa-solid fa-bars"></i>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Code Runner</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="./css/index.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <audio id="autoplayAudio">
+    <source src="./assets/bgMusic.mp3" type="audio/mp3" loop>
+  </audio>
+  <header class="header">
+    <h1>CODE<span>RUNNER</span></h1>
+    <nav>
+      <div style="position: relative;">
+        <button id="instructionButton" class="btn" type="button" onclick="toggleInstructions()">
+          <!-- Call JavaScript function to toggle instructions -->
+          <i class="fa-sharp fa-solid fa-question fa-lg" style="color: #ffff;"></i>
+        </button>
+        <div id="instructions" class="instructions-card">
+          <!-- Your instructions content goes here -->
         </div>
       </div>
-      <div class="dropdown-menu">
-        <li><a href="hero">Home</a></li>
-        <li><a href="about">About</a></li>
-        <li><a href="#login-section">Login</a></li>
-        <li><a href="feedback">Feedback</a></li>
-        <li><a href="#" class="action-btn">Get Started</a></li>
+
+
+      <div>
+        <a href="#">
+          <button id="audioButton" onclick="toggleAudio()">
+            <i id="audioIcon" class="fa-solid fa-volume-high" style="color: #ffff;"></i>
+          </button>
+        </a>
       </div>
-    </header>
 
-    <div class="bgAnimation" id="bgAnimation">
-      <div class="backgroundAnim"></div>
-    </div>
-
-    <main>
-      <section class="hero">
-        <h1>Welcome</h1>
-        <p>
-          CodeRunner is an entertaining maze game <br />
-          which also tests your coding skills
-        </p>
-      </section>
-      <!-- Login Section -->
-      <section id="login-section">
-        <div class="login-box">
-          <form action="">
-            <h2>Login</h2>
-            <div class="input-box">
-              <span class="icon"><i class="fa-solid fa-envelope"></i></span>
-              <input type="email" required />
-              <label>Email</label>
-            </div>
-            <div class="input-box">
-              <span class="icon"><i class="fa-solid fa-lock"></i></span>
-              <input type="password" required />
-              <label>Password</label>
-            </div>
-            <div class="remember-forgot">
-              <label><input type="checkbox" />Remember me</label>
-              <a href="#">Forgot Password</a>
-            </div>
-            <button type="submit">Login</button>
-            <div class="register-link">
-              <p>Don't have an account? <a href="#">Register</a></p>
-            </div>
-          </form>
+      <div style="position: relative;">
+        <button id="aboutButton" class="btn" type="button" onclick="toggleAbout()">
+          <i class="fa-solid fa-exclamation fa-lg" style="color: #ffff;"></i>
+        </button>
+        <div id="about" class="about-card">
+          <!-- Your instructions content goes here -->
         </div>
-      </section>
+      </div>
+    </nav>
+  </header>
+  <div class="bgAnimation" id="bgAnimation">
+    <div class="backgroundAnim"></div>
+  </div>
 
-      <!-- Signup-Sectiom -->
-      <section id="signup-section">
-        <div class="signup-box">
-          <form action="">
-            <h2>Signup</h2>
-            <div class="input-box">
-              <span class="icon"><i class="fa-solid fa-user"></i></span>
-              <input type="text" required />
-              <label>Username</label>
-            </div>
-            <div class="input-box">
-              <span class="icon"><i class="fa-solid fa-envelope"></i></span>
-              <input type="email" required />
-              <label>Email</label>
-            </div>
-            <div class="input-box">
-              <span class="icon"><i class="fa-solid fa-lock"></i></span>
-              <input type="password" required />
-              <label>Password</label>
-            </div>
-            <button type="submit">Signup</button>
-          </form>
-        </div>
-      </section>
-    </main>
+  <div class="signup-login">
+    <section id="section-1" class="visible">
+      <div class="login-box">
+        <form action="">
+          <h2 class="text-center text-white">Login</h2>
+          <div class="input-box">
+            <span class="icon"><i class="fa-solid fa-user"></i></span>
+            <input type="text" required />
+            <label>Username</label>
+          </div>
+          <div class="input-box">
+            <span class="icon"><i class="fa-solid fa-lock"></i></span>
+            <input type="password" required />
+            <label>Password</label>
+          </div>
+          <div class="forgot-password">
+            <a href="#">Forgot Password</a>
+          </div>
+          <button type="submit" class="login-button">Login</button>
+          <div class="register-link">
+            <p>Don't have an account? <a href="#" onclick="showSection(2)" class="register-link">Register</a></p>
+          </div>
+        </form>
+      </div>
+    </section>
 
-    <script
-      src="https://kit.fontawesome.com/0508f81e27.js"
-      crossorigin="anonymous"
-    ></script>
 
-    <script src="./js/index.js" async defer></script>
-  </body>
+    <section id="section-2" class="hidden">
+      <div class="signup-box">
+        <form action="">
+          <h2 class="text-center text-white">Signup</h2>
+          <div class="input-box">
+            <span class="icon"><i class="fa-solid fa-user"></i></span>
+            <input type="text" required />
+            <label>Username</label>
+          </div>
+          <div class="input-box">
+            <span class="icon"><i class="fa-solid fa-envelope"></i></span>
+            <input type="email" required />
+            <label>Email</label>
+          </div>
+          <div class="input-box">
+            <span class="icon"><i class="fa-solid fa-lock"></i></span>
+            <input type="password" required />
+            <label>Password</label>
+          </div>
+          <button type="submit" class="signup-button">Signup</button>
+          <div class="login-link">
+            <p>Already have an account? <a href="#" onclick="showSection(1)" class="login-link">Login</a></p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+  <script src="https://kit.fontawesome.com/0508f81e27.js" crossorigin="anonymous"></script>
+  <script src="./js/index.js" async defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
 </html>
