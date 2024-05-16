@@ -1,7 +1,47 @@
 body{
-    background-image: url(https://images.squarespace-cdn.com/content/v1/5d7b921aa20ea468a889fb20/1568380647526-YX9J52FU8INU1YFJS65P/njPhhkca.gif);
     background-size:cover;
     background-position: center;
+    color: #fff;
+    background: #111;
+    font-family: 'Poppins', sans-serif;
+}
+
+.bgAnimation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows: repeat(20s, 1fr);
+    background: #1d1d1d;
+    filter: saturate(2);
+    overflow: hidden;
+}
+
+.colorBox {
+    filter: brightness(1.1);
+    transition: 2s ease;
+    position: relative;
+    margin: 2px;
+    background: #1d1d1d;
+}
+
+.colorBox:hover {
+    background: #db7a0b;
+    transition-duration: 0s;
+}
+
+.backgroundAnim {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: #db7a0b;
+    filter: blur(60px);
+    animation: animBack 6s linear infinite;
 }
 .maze {
     display: grid;
@@ -13,18 +53,20 @@ body{
     width: 30px;
     height: 30px;
     background-color: #eee;
+
 }
 .wall:hover{
-    background-color:#2d4f3f ;
+    background-color: #db7a0b ;
     transform: translateY(-10px);
 }
 .wall {
-    background-color:#183d3d;
+    
+    background-color:#db7a0b;
     
 }
 .player {
-    background-color: #ff5733;
-    background-image: url(https://images.squarespace-cdn.com/content/v1/5d7b921aa20ea468a889fb20/1568380647526-YX9J52FU8INU1YFJS65P/njPhhkca.gif);
+     /* Player avatar */
+    background-image: url(../assets/Avatar.gif); 
 
 }
 .fade-out {
@@ -50,4 +92,19 @@ body{
     .player {
         background-color: #ff5733;
     }
+}
+
+/* gametitile */
+#game-title {
+    backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: center;
+    position: relative;
+    color: #eee;
+    z-index: 9999 !important;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 60px;
+    cursor: pointer;
+    animation: pop-out 0.5s ease-in-out forwards;
+    transition: color 0.3s;
 }
