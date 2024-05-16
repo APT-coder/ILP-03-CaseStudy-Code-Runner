@@ -15,12 +15,11 @@ router.get('/users', (req, res) => {
 });
 
 // User login and signup check
-router.get('/users/:userName/:email/:password', (req, res) => {
+router.get('/users/:userName/:password', (req, res) => {
     const userName = req.params.userName;
-    const email = req.params.email;
     const password = req.params.password;
    
-    pool.query('SELECT * FROM users WHERE user_name = $1 AND user_email = $2 and user_password = $3', [userName, email, password], (err, result) => {
+    pool.query('SELECT * FROM users WHERE user_name = $1 AND user_password = $2', [userName, password], (err, result) => {
         if (err) {
             console.error('Error executing query', err.stack);
             return res.status(500).json({ error: 'Internal server error' });
@@ -34,7 +33,7 @@ router.get('/users/:userName/:email/:password', (req, res) => {
 });
 
 // Create a new user
-router.post('/users/:userName/:email/:password:/initialScore', (req, res) => {
+router.post('/users/:userName/:email/:password/:initialScore', (req, res) => {
     const userName = req.params.userName;
     const email = req.params.email;
     const password = req.params.password;
@@ -96,15 +95,15 @@ router.get('/scores/:userName', (req, res) => {
 });
 
 // Update user score
-router.patch('/user_score/:userName/:initialScore', (req, res) => {
+router.patch('/user_score/:userName/:score', (req, res) => {
     const userName = req.params.userName;
-    const initialScore = req.params.initialScore;
+    const score = req.params.initialScore;
 
-    if (!initialScore || isNaN(initialScore)) {
+    if (!score || isNaN(score)) {
         return res.status(400).json({ error: 'Score must be a valid number' });
     }
 
-    pool.query('UPDATE user_score SET score = $1 WHERE user_name = $2', [initialScore, userName], (err, result) => {
+    pool.query('UPDATE user_score SET score = $1 WHERE user_name = $2', [score, userName], (err, result) => {
         if (err) {
             console.error('Error executing query', err.stack);
             return res.status(500).json({ error: 'Internal server error' });
@@ -133,6 +132,18 @@ router.post('/user_feedback/:userName/:feedbackDesc/:createdOn', (req, res) => {
             return res.status(500).json({ error: 'Internal server error' });
         } else {
             res.status(201).json(result.rows[0]);
+        }
+    });
+});
+
+//Get scores in decreasing order for leaderboard
+router.get('/scores', (req, res) => {
+    pool.query('SELECT * from user_score order by score desc ;', (err, result) => {
+        if (err) {
+            console.error('Error executing query', err.stack);
+            res.status(500).json({ error: 'Internal server error' });
+        } else {
+            res.json(result.rows);
         }
     });
 });

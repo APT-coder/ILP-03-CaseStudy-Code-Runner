@@ -300,6 +300,8 @@ function movePlayer(event) {
                     questionElement.appendChild(scoreMessage);
                 }, 1000); // Adjust the delay as needed
             }, 2000); // Adjust the delay as needed
+            
+            
     }
 }
 let wrongAttempts = 0;
