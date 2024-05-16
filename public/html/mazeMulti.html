@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Runner</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/mazeMulti.css">
+</head>
+<body>
+    <div class="container mt-5 align-items-center">
+        <div class="row align-items-center d-flex flex-wrap">
+            <!-- First Maze -->
+            <div class="card col-lg-6 col-md-12" style="width: 18rem;">
+                <div class="card-body question-container" id="questionCard1">
+                  <h5 class="card-title" id="question-intro1"></h5>
+                  <h6 class="card-subtitle mb-2 text-body-secondary" id="questions1"></h6>
+                  <p class="card-text" id="options1"></p>
+                  <div id="result1"></div>
+                </div>
+            </div>
+            <div class="card col-lg-6 col-md-12" style="width: 18rem;">
+                <div class="card-body question-container" id="questionCard2">
+                  <h5 class="card-title" id="question-intro2"></h5>
+                  <h6 class="card-subtitle mb-2 text-body-secondary" id="questions2"></h6>
+                  <p class="card-text" id="options2"></p>
+                  <div id="result2"></div>
+                </div>
+            </div>
+            <!-- Second Maze -->
+            <div class="col-lg-6 col-md-12 mt-5 mb-3">
+                <div id="maze1" class="maze"></div>
+            </div>
+            <div class="col-lg-6 col-md-12 mt-5 mb-3">
+                <div id="maze2" class="maze"></div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script src="../js/mazeMulti.js"></script>
+</html>
