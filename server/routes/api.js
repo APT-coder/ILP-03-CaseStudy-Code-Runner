@@ -18,6 +18,7 @@ router.get('/users', (req, res) => {
 router.get('/users/:userName/:password', (req, res) => {
     const userName = req.params.userName;
     const password = req.params.password;
+   
     pool.query('SELECT * FROM users WHERE user_name = $1 AND user_password = $2', [userName, password], (err, result) => {
         if (err) {
             console.error('Error executing query', err.stack);
@@ -32,10 +33,13 @@ router.get('/users/:userName/:password', (req, res) => {
 });
 
 // Create a new user
-router.post('/users', (req, res) => {
-    const { name, password, initialScore } = req.body;
+router.post('/users/:userName/:email/:password/:initialScore', (req, res) => {
+    const userName = req.params.userName;
+    const email = req.params.email;
+    const password = req.params.password;
+    const initialScore = req.params.initialScore;
 
-    if (!name || !password) {
+    if (!userName || !password || !initialScore) {
         return res.status(400).json({ error: 'Name and password are required' });
     }
     pool.query('BEGIN', (err) => {
@@ -43,7 +47,7 @@ router.post('/users', (req, res) => {
             console.error('Error beginning transaction', err.stack);
             return res.status(500).json({ error: 'Internal server error' });
         }
-        pool.query('INSERT INTO users (user_name, user_password) VALUES ($1, $2) RETURNING *', [name, password], (err, userResult) => {
+        pool.query('INSERT INTO users (user_name, user_email, user_password) VALUES ($1, $2, $3) RETURNING *', [userName, email, password], (err, userResult) => {
             if (err) {
                 console.error('Error inserting user', err.stack);
                 pool.query('ROLLBACK', (rollbackErr) => {
@@ -53,7 +57,7 @@ router.post('/users', (req, res) => {
                     return res.status(500).json({ error: 'Internal server error' });
                 });
             } else {
-                pool.query('INSERT INTO user_score (user_name, score) VALUES ($1, $2)', [name, initialScore], (err, scoreResult) => {
+                pool.query('INSERT INTO user_score (user_name, score) VALUES ($1, $2)', [userName, initialScore], (err, scoreResult) => {
                     if (err) {
                         console.error('Error inserting user score', err.stack);
                         pool.query('ROLLBACK', (rollbackErr) => {
@@ -91,15 +95,15 @@ router.get('/scores/:userName', (req, res) => {
 });
 
 // Update user score
-router.patch('/user_score/:username', (req, res) => {
-    const { username } = req.params;
-    const { score } = req.body;
+router.patch('/user_score/:userName/:score', (req, res) => {
+    const userName = req.params.userName;
+    const score = req.params.initialScore;
 
     if (!score || isNaN(score)) {
         return res.status(400).json({ error: 'Score must be a valid number' });
     }
 
-    pool.query('UPDATE user_score SET score = $1 WHERE user_name = $2', [score, username], (err, result) => {
+    pool.query('UPDATE user_score SET score = $1 WHERE user_name = $2', [score, userName], (err, result) => {
         if (err) {
             console.error('Error executing query', err.stack);
             return res.status(500).json({ error: 'Internal server error' });
@@ -114,17 +118,32 @@ router.patch('/user_score/:username', (req, res) => {
 });
 
 // Add feedback
-router.post('/user_feedback', (req, res) => {
-    const { user_name, feedback_title, feedback_description, created_on } = req.body;
-    if (!user_name || !feedback_title || !feedback_description || !created_on) {
-        return res.status(400).json({ error: 'User name, feedback title, description, and created date are required' });
+router.post('/user_feedback/:userName/:feedbackDesc/:createdOn', (req, res) => {
+    const userName = req.params.userName;
+    const feedbackDesc = req.params.feedbackDesc;
+    const createdOn = req.params.createdOn;
+
+    if (!userName || !feedbackDesc || !createdOn) {
+        return res.status(400).json({ error: 'User name, feedback description and created date are required' });
     }
-    pool.query('INSERT INTO user_feedback (user_name, feedback_title, feedback_description, created_on) VALUES ($1, $2, $3, $4) RETURNING *', [user_name, feedback_title, feedback_description, created_on], (err, result) => {
+    pool.query('INSERT INTO user_feedback (user_name, feedback_description, created_on) VALUES ($1, $2, $3) RETURNING *', [userName, feedbackDesc, createdOn], (err, result) => {
         if (err) {
             console.error('Error executing query', err.stack);
             return res.status(500).json({ error: 'Internal server error' });
         } else {
             res.status(201).json(result.rows[0]);
+        }
+    });
+});
+
+//Get scores in decreasing order for leaderboard
+router.get('/scores', (req, res) => {
+    pool.query('SELECT * from user_score order by score desc ;', (err, result) => {
+        if (err) {
+            console.error('Error executing query', err.stack);
+            res.status(500).json({ error: 'Internal server error' });
+        } else {
+            res.json(result.rows);
         }
     });
 });
