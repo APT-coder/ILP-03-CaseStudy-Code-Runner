@@ -413,4 +413,38 @@ position: sticky;
 top: 0; 
 }
 
+.controls-image{
+    width: 100%;
+    background-color: #db7a0bac;
+    border-radius: 16px;
+  }
+
+  .instructions-card {
+    display: none;
+    position: absolute;
+    top: calc(170%);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    background-color: #000000;
+    color: #333;
+    border: 1px solid #000000;
+    border-radius: 16px;
+    z-index: 1000;
+}
+
+.about-card {
+    display: none;
+    position: absolute;
+    top: calc(170%);
+    left: calc(50% - 110px);
+    transform: translateX(-50%);
+    width: 200px;
+    background-color: #db7a0bac;
+    color: black;
+    border: 1px solid #000000;
+    border-radius: 16px;
+    padding: 10px;
+    z-index: 1000;
+}
 
