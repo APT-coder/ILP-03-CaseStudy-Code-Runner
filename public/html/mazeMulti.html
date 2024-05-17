@@ -6,8 +6,28 @@
     <title>Code Runner</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/mazeMulti.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- changes -->
+    <h1 id="game-title">Code Runner</h1>
+    <!-- movement audio -->
+    <audio id="move-audio" src="../assets/move.mp3"></audio>
+    <!-- Correct answer audio -->
+    <audio id="correct-audio" src="../assets/correctAnswer.mp3"></audio>
+    <!-- Wrong answer audio -->
+    <audio id="wrong-audio" src="../assets/wrongAnswer.mp3"></audio>
+    <!-- win audio -->
+    <audio id="win-audio" src="../assets/win.mp3"></audio>
+
+    <div class="bgAnimation" id="bgAnimation">
+        <div class="backgroundAnim"></div>
+        </div>
+
+    <!-- changes end -->
+
+
+
     <div class="container mt-5 align-items-center justify-content-center">
         <div class="row">
             <div class="col text-center">
@@ -16,7 +36,7 @@
             </div>
         </div>
         <div class="row align-items-center d-flex flex-wrap">
-            <div class="col-lg-6 col-md-12 mt-5 mb-3 ">
+            <div class="col-lg-6 col-md-12 mt-5 mb-3" >
                 <div id="maze1" class="maze"></div>
             </div>
             <div class="col-lg-6 col-md-12 mt-5 mb-3">
