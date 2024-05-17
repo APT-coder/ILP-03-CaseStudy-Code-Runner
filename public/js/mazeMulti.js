@@ -54,7 +54,10 @@ let playerPosition2 = { x: 0, y: 0 };
 
 const endPathPosition = { x: 21, y: 18 }; 
 let gameStarted = false;
- 
+
+
+
+
 const drawMaze1 = () => {
     maze1Element.innerHTML = '';
     for (let i = 0; i < maze1.length; i++) {
@@ -65,7 +68,7 @@ const drawMaze1 = () => {
                 cell.classList.add('wall');
             }
             if (i === playerPosition1.y && j === playerPosition1.x) {
-                cell.classList.add('player');
+                cell.classList.add('player1');
             }
             maze1Element.appendChild(cell);
         }
@@ -82,7 +85,7 @@ const drawMaze2 = () => {
                 cell.classList.add('wall');
             }
             if (i === playerPosition2.y && j === playerPosition2.x) {
-                cell.classList.add('player');
+                cell.classList.add('player2');
             }
             maze2Element.appendChild(cell);
         }
@@ -126,17 +129,37 @@ const movePlayer1 = (dx, dy) => {
         playerPosition1.x = newX;
         playerPosition1.y = newY;
         drawMaze1();
+
+        // adding movement audio
+        document.addEventListener('keydown', function(event) {
+            const audio = document.getElementById('move-audio');
+            const keys = ["w", "a", "s", "d"];
+            if (keys.includes(event.key)) {
+                audio.play();
+            }
+        });
     }
 };
  
 const movePlayer2 = (dx, dy) => {
     const newX = playerPosition2.x + dx;
     const newY = playerPosition2.y + dy;
- 
+    
+    // adding movement audio
+    document.addEventListener('keydown', function(event) {
+        const audio = document.getElementById('move-audio');
+        const keys = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
+        if (keys.includes(event.key)) {
+            audio.play();
+        }
+    });
+
     if (isValidMove(newX, newY, maze2)) {
         playerPosition2.x = newX;
         playerPosition2.y = newY;
         drawMaze2();
+
+        
     }
 };
  
@@ -156,7 +179,6 @@ const displayWinner = (winner) => {
     const modal = document.getElementById('winnerModal');
     const winnerText = document.querySelector('.winner-text');
     const closeButton = document.querySelector('.close');
-  
     winnerText.textContent = `${winner} is the winner!`;
   
     modal.style.display = 'block';
@@ -170,6 +192,10 @@ const displayWinner = (winner) => {
         modal.style.display = 'none';
       }
     };
+         // adding win-audio
+         const audio = document.getElementById('win-audio');
+         audio.play();
+          //done
   };
 
   document.getElementById('startGameBtn').addEventListener('click', () => {
@@ -187,8 +213,23 @@ const displayWinner = (winner) => {
         }
     }, 1000);
 });
-  
- 
+
+
+//adding background
+const bgAnimation = document.getElementById('bgAnimation');
+const numberOfColorBoxes = 400;
+
+for (let i = 0; i < numberOfColorBoxes; i++) {
+  const colorBox = document.createElement('div');
+  colorBox.classList.add('colorBox');
+  bgAnimation.append(colorBox)
+}
+
+
+
 drawMaze1();
 drawMaze2();
+
+
+
  
