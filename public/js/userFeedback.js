@@ -39,6 +39,7 @@ document.getElementById('feedbackForm').addEventListener('submit', async functio
         console.log('Email Sent:', emailResponse);
 
         alert("Feedback sent successfully!!!");
+        window.location.href = "../html/main.html";
     } catch (error) {
         console.error('Error:', error);
         alert("Failed to send feedback. Please try again later.");

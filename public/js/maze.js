@@ -244,7 +244,7 @@ const visitedBlocks = [];
 
 const movePlayer = (event) => {
     if (!answeredCorrectly) {
-        //return;
+        return;
     }
     let newX = playerPosition.x;
     let newY = playerPosition.y;
