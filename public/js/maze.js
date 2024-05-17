@@ -244,7 +244,7 @@ const visitedBlocks = [];
 
 const movePlayer = (event) => {
     if (!answeredCorrectly) {
-        return;
+        //return;
     }
     let newX = playerPosition.x;
     let newY = playerPosition.y;
@@ -290,15 +290,17 @@ const movePlayer = (event) => {
         optionsElement.innerHTML = '';
         questionElement.appendChild(congratsMessage);
 
-        setTimeout(() => {
-            congratsMessage.style.opacity = '0';
+        const scoreMessage = document.createElement('p');
+        scoreMessage.textContent = 'Your score: ' + score;
+        questionElement.appendChild(scoreMessage);
 
+        setTimeout(() => {
+        congratsMessage.style.opacity = '0';
+        
             setTimeout(() => {
-                const scoreMessage = document.createElement('p');
-                scoreMessage.textContent = 'Your score: ' + score;
-                questionElement.appendChild(scoreMessage);
+                document.getElementById('feedbackFormContainer').style.display = 'flex';
             }, 1000);
-        }, 2000);
+        }, 3000);
     }
 };
 
@@ -337,7 +339,7 @@ const displayQuestion = (question, newX, newY) => {
                         scoreMessage.textContent = 'Your score: ' + score;
                         questionElement.appendChild(scoreMessage);
                     }
-                }, 2000);
+                }, 1000);
             }
         });
         optionsElement.appendChild(choice);
@@ -352,6 +354,7 @@ const getRandomQuestion = () => {
 const gameOver = () => {
     questionElement.textContent = 'Game Over';
     optionsElement.innerHTML = '';
+    document.getElementById('feedbackFormContainer').style.display = 'flex';
 };
 
 const displayQuestionIntro = () => {
@@ -359,7 +362,7 @@ const displayQuestionIntro = () => {
         const questionIntro = document.getElementById('question-intro');
         questionIntro.textContent = "Your Question is here!!";
         questionIntro.classList.add('fade-out');
-    }, 2000);
+    }, 1000);
 };
 
 const updateUserScore = async () => {
@@ -403,3 +406,7 @@ document.addEventListener('keydown', function(event) {
         audio.play();
     }
 });
+
+function closeForm() {
+    window.location.href = "../html/main.html";
+}
