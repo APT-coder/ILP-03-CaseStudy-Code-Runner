@@ -5,7 +5,7 @@
 **Backend:** Express.JS<br>
 **Database:** PostgreSQL<br>
 
-**Hosted at:** [Code Runner](https://code-runner-main.netlify.app/))
+**Hosted at:** [Code Runner](https://code-runner-main.netlify.app/) (Requires Database to be setup and running as localhost)
 
 ## **Screenshots**
 ![image](https://github.com/APT-coder/ILP-03-CaseStudy-Code-Runner/assets/117518992/01c5823a-a77d-4515-9ee8-1d60b67cb96d)
